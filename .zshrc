@@ -1,19 +1,28 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/kali/.oh-my-zsh"
+export ZSH="/home/mufasa/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-# ZSH_THEME="robbyrussell"
-
-# ZSH_THEME="dracula"
-# ZSH_THEME="magicmace"
 # ZSH_THEME="half-life"
-ZSH_THEME="spaceship"
+# ZSH_THEME="powerlevel10k/powerlevel10k"
+ZSH_THEME="xxf"
+# ZSH_THEME="zeta"
+# ZSH_THEME="bullet-train"
+# Set list of themes to pick from when loading at random
+# Setting this variable when ZSH_THEME=random will cause zsh to load
+# a theme from this variable instead of looking in $ZSH/themes/
 # If set to an empty array, this variable will have no effect.
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
@@ -46,6 +55,8 @@ ZSH_THEME="spaceship"
 # ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
+# Caution: this setting can cause issues with multiline prompts (zsh 5.7.1 and newer seem to work)
+# See https://github.com/ohmyzsh/ohmyzsh/issues/5765
 # COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
@@ -105,6 +116,49 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias c="clear"
-alias s="neofetch"
-alias ra="ranger"
+alias c='clear'
+alias ra='ranger'
+alias s='neofetch'
+alias q='exit'
+alias ls='exa -G --color auto --icons'
+alias ll='exa -l --color always --icons'
+alias weather='curl wttr.in/suzhou'
+alias clock='peaclock'
+alias vim='nvim'
+alias showpic='sxiv'
+alias top='btm'
+alias hex='hexyl'
+
+# python
+export PATH=/home/mufasa/.local/bin/:$PATH
+
+# Tilix
+if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+        source /etc/profile.d/vte.sh
+fi
+
+# Go path
+export GOPATH=$HOME/go/
+export PATH=$PATH:$GOPATH/bin
+
+# Go Proxy
+export PATH=$PATH:/usr/local/go/bin
+export GO111MODULE=on
+export GOPROXY=https://goproxy.cn
+
+source /home/mufasa/.config/broot/launcher/bash/br
+
+# linaro gcc
+# export PATH=$PATH:/usr/local/arm/gcc-linaro-6.3.1-2017.05-x86_64_arm-linux-gnueabihf/bin
+export PATH=$PATH:/usr/local/arm/gcc-linaro-4.9.4-2017.01-x86_64_arm-linux-gnueabihf/bin
+
+# >>> xmake >>>
+[[ -s "$HOME/.xmake/profile" ]] && source "$HOME/.xmake/profile" # load xmake profile
+# <<< xmake <<<
+
+# rustup
+export RUSTUP_DIST_SERVER=https://mirrors.sjtug.sjtu.edu.cn/rust-static
+export RUSTUP_UPDATE_ROOT=https://mirrors.sjtug.sjtu.edu.cn/rust-static/rustup
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
